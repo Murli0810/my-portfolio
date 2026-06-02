@@ -93,19 +93,21 @@ export default function Terminal() {
     }
 
     const sendSecretAlertNotification = async () => {
-      const DISCORD_WEBHOOK_URL = process.env.Discord_WebHook_URL;
-
       try {
-        await fetch(DISCORD_WEBHOOK_URL, {
+        const response = await fetch("/api/alert", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            content:
-              "🚨 **Security Alert:** Someone typed the `secret` command on your portfolio terminal!",
+            message:
+              "Someone typed the `secret` command on your portfolio terminal!",
           }),
         });
+
+        if (!response.ok) {
+          console.error("Failed to send alert:", response.statusText);
+        }
       } catch (error) {
-        console.error("Failed to send portfolio terminal alert:", error);
+        console.error("Failed to send alert:", error);
       }
     };
 
