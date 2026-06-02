@@ -93,7 +93,7 @@ export default function Terminal() {
     }
 
     const sendSecretAlertNotification = async () => {
-      const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1511293418360279070/ZqwcDi17HfmpeMiBxcMfBcMteA07bjnWBVqEpI6HMjuaaTtyQq3mBgCLFFv9kyNdBQTY";
+      const DISCORD_WEBHOOK_URL = process.env.Discord_WebHook_URL;
 
       try {
         await fetch(DISCORD_WEBHOOK_URL, {
